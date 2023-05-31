@@ -15,13 +15,13 @@ namespace Spel
             random = new Random();
         }
 
-       
+
         private void button1_Click(object sender, EventArgs e)
         {
-            int maxNumber = Convert.ToInt32(guessTextBox.Text);
-            secretNumber = random.Next(0, maxNumber + 1); // skapar slumpm‰ssigt tal
+            int maxNumber = Convert.ToInt32(comboBox1.Text);
+            secretNumber = random.Next(0, maxNumber + 1); // skapar slumpm√§ssigt tal
 
-            MessageBox.Show("Ett hemligt tal har slumpats fram. Bˆrja gissa!");
+            MessageBox.Show("Ett hemligt tal har slumpats fram. B√∂rja gissa!");
             guessTextBox.Enabled = true;
             guessButton.Enabled = true;
             startButton.Enabled = false;
@@ -29,44 +29,61 @@ namespace Spel
 
 
 
+
         }
 
-        private void guessButton_Click(object sender, EventArgs e)
+        public void guessButton_Click(object sender, EventArgs e)
         {
             int userGuess = Convert.ToInt32(guessTextBox.Text);
 
             if (userGuess == secretNumber)
             {
-                MessageBox.Show("Grattis! Du gissade r‰tt!");
-                ResetGame();
+                textBox1.Text = "Grattis du gissade r√§tt tal";
+                ResetGame(sender);
+                textBox3.Text = secretNumber.ToString();
+                startaom.Enabled = true;
+                listBox1.Items.Add("Anv√§ndarn vann");
+
 
             }
             else if (userGuess < secretNumber)
             {
-                MessageBox.Show("Fˆr hˆgt! Fˆrsˆk igen.");
+                textBox1.Text = ("F√∂r l√•gt! F√∂rs√∂k igen.");
+                textBox3.Text = secretNumber.ToString();
+                startaom.Enabled = true;
+                listBox1.Items.Add("Datorn vann");
 
             }
             else
             {
-                MessageBox.Show("Fˆr hˆgt! Fˆrsˆk igen.");
+                textBox1.Text = ("F√∂r h√∂gt! F√∂rs√∂k igen.");
+                textBox3.Text = secretNumber.ToString();
+                startaom.Enabled = true;
+                listBox1.Items.Add("Datorn vann");
             }
 
 
 
             guessTextBox.Clear();
 
-            public void ResetGame()
-            {
-                guessTextBox.Clear();
-                guessTextBox.Enabled = false;
-                guessButton.Enabled = false;
-                startButton.Enabled = true;
+
+        }
+        public void ResetGame(object sender)
+        {
+            guessTextBox.Clear();
+            guessTextBox.Enabled = false;
+            guessButton.Enabled = false;
+            startButton.Enabled = true;
 
 
-            }
         }
 
-        
-      
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            guessTextBox.Clear();
+            guessTextBox.Enabled = false;
+            guessButton.Enabled = false;
+            startButton.Enabled = true;
+        }
     }
 }
